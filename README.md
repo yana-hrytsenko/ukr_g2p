@@ -1,5 +1,5 @@
 
-**[Live demo →](https://phonetikytsia.onrender.com)**
+**[Live demo →](https://ukr-g2p.onrender.com )**
 
 ![Python](https://img.shields.io/badge/python-3.11-blue)
 ![License](https://img.shields.io/badge/License-Non--Commercial%20Research-orange)
