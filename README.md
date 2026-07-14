@@ -56,37 +56,6 @@ underlying stress library had no entry.
 
 ---
 
-## Output Modes
-
-The system distinguishes three levels of phonetic detail, each 
-available in Ukrainian notation, IPA, and English-friendly 
-romanization:
-
-### Phonemic `/на'стрʹій/` `/'nɑstrʲij/`
-The underlying phonological representation. No allophonic detail — 
-stressed and unstressed vowels are identical, assymilations apply,
-and phonemes appear in their base form. 
-Useful for linguistic analysis and as a reference level.
-
-### Broad phonetic `[на'стрʹіĭ]` `['nɑstrʲii̯]`
-Main allophones are shown. Stress affects vowel quality (nstressed `а → ɐ` etc.), 
-coda в and й become non-syllabic, fine-grained в allophony (`ʋ`, `w`, `ʍ`, `u̯`)
-gemination is marked, and vowel reduction is indicated. This is the 
-most useful level for language learners and most practical applications.
-
-### Narrow phonetic `[нã'стрʹіĭ]` `['n̪ɑ̃s̪t̪r̪ʲii̯]`
-Full allophonic detail: dental diacritics on coronal consonants, 
-dark `ɫ` for hard л, nasalization on vowels adjacent to nasals, 
-labialization before round vowels, fronting in palatal environments, 
-and .
-
-### English-friendly `<n-AH-s-t-r-ee-y>`
-Approximate pronunciation using English letter combinations, with 
-stressed vowels in uppercase. Intended for English speakers with no 
-knowledge of IPA.
-
----
-
 ## Architecture
 
 ### Key design decisions
@@ -115,6 +84,37 @@ palatalization, length, labialization, fronting, nasalization) are
 stored as attributes on token objects rather than embedded as special 
 characters in a string. This avoids the fragile string mutation 
 patterns common in earlier rule-based G2P implementations.
+
+---
+
+## Output Modes
+
+The system distinguishes three levels of phonetic detail, each 
+available in Ukrainian notation, IPA, and English-friendly 
+romanization:
+
+### Phonemic `/на'стрʹій/` `/'nɑstrʲij/`
+The underlying phonological representation. No allophonic detail — 
+stressed and unstressed vowels are identical, assymilations apply,
+and phonemes appear in their base form. 
+Useful for linguistic analysis and as a reference level.
+
+### Broad phonetic `[на'стрʹіĭ]` `['nɑstrʲii̯]`
+Main allophones are shown. Stress affects vowel quality (nstressed `а → ɐ` etc.), 
+coda в and й become non-syllabic, fine-grained в allophony (`ʋ`, `w`, `ʍ`, `u̯`)
+gemination is marked, and vowel reduction is indicated. This is the 
+most useful level for language learners and most practical applications.
+
+### Narrow phonetic `[нã'стрʹіĭ]` `['n̪ɑ̃s̪t̪r̪ʲii̯]`
+Full allophonic detail: dental diacritics on coronal consonants, 
+dark `ɫ` for hard л, nasalization on vowels adjacent to nasals, 
+labialization before round vowels, fronting in palatal environments, 
+and .
+
+### English-friendly `<n-AH-s-t-r-ee-y>`
+Approximate pronunciation using English letter combinations, with 
+stressed vowels in uppercase. Intended for English speakers with no 
+knowledge of IPA.
 
 ---
 
