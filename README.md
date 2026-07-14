@@ -85,6 +85,8 @@ stored as attributes on token objects rather than embedded as special
 characters in a string. This avoids the fragile string mutation 
 patterns common in earlier rule-based G2P implementations.
 
+**Diagram** Can be found in ukr_g2p/doc.
+
 ---
 
 ## Output Modes
