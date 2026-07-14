@@ -17,14 +17,20 @@ fine-tuned ByT5 neural model for broad IPA.
 Input: **навчання**
 
 ukr_phonemic : /навча'нʹнʹа/
+
 ukr_broad    : [наўча'нʹ:а]
+
 ukr_narrow   : [нãўчã'˙нʹ:˙ã]
 
+
 ipa_phonemic : /nɑ'ʋt͡ʃɑnʲnʲɑ/
+
 ipa_broad    : [nɐ'u̯t͡ʃɑnʲ:ɐ]
+
 ipa_narrow   : [n̪ɐ̃'u̯t͡ʃɑ̟̃n̪ʲ:ɐ̟̃]
 
-eng_friendly : <n-ah-v-ch-AH-nj-ny-ah>
+
+eng_friendly : n-ah-v-ch-AH-nj-ny-ah
 
 ---
 
