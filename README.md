@@ -16,9 +16,6 @@ fine-tuned ByT5 neural model for broad IPA.
 
 Input: **навчання**
 
-| Mode | Output |
-|------|--------|
-
 ukr_phonemic : /навча'нʹнʹа/
 ukr_broad    : [наўча'нʹ:а]
 ukr_narrow   : [нãўчã'˙нʹ:˙ã]
@@ -285,12 +282,12 @@ pip install -r requirements.txt
 ## Usage
 
 ```python
-from pipeline import transcribe
+from ukr_g2p import transcribe
 
 transcribe("навчання", mode="ipa_broad")
 # [nɐ'u̯t͡ʃɑnʲ:ɐ]
 
-transcribe("навчання", mode="all")
+transcribe("навчання", mode="all", formatted=False)
 # returns dict with all seven modes
 ```
 
