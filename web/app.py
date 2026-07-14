@@ -1,4 +1,7 @@
 from flask import Flask, request, jsonify, send_from_directory
+from light_stress import install_lite_stub
+install_lite_stub()
+
 from ukr_g2p import transcribe
 
 app = Flask(__name__, static_folder="static", static_url_path="")
