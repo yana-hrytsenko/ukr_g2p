@@ -1,6 +1,3 @@
-# This dataset generation script was generated with assistance from an AI tool
-# and reviewed/validated by the author.
-
 import argparse
 import sys
 
@@ -11,6 +8,16 @@ MODES = [
     "ipa_phonemic", "ipa_broad", "ipa_narrow",
     "eng_friendly",
 ]
+
+WRAP = {
+    "ukr_phonemic": ("/", "/"),
+    "ukr_broad":    ("[", "]"),
+    "ukr_narrow":   ("[", "]"),
+    "ipa_phonemic": ("/", "/"),
+    "ipa_broad":    ("[", "]"),
+    "ipa_narrow":   ("[", "]"),
+    "eng_friendly": ("<", ">"),
+}
 
 
 def build_parser():
@@ -32,32 +39,11 @@ def build_parser():
     parser.add_argument(
         "--raw",
         action="store_true",
-        help="With --mode all, print 'key: value' lines instead of the formatted block",
+        help="With --mode all, print 'key: value' lines; with a single mode, skip the /.../ [...] wrapping",
     )
     return parser
 
 
 def main(argv=None):
     parser = build_parser()
-    args = parser.parse_args(argv)
-    text = " ".join(args.text)
-
-    try:
-        if args.mode == "all":
-            if args.raw:
-                results = transcribe(text, mode="all", formatted=False)
-                for key in MODES:
-                    print(f"{key}: {results[key]}")
-            else:
-                print(transcribe(text, mode="all", formatted=True))
-        else:
-            print(transcribe(text, mode=args.mode))
-    except Exception as exc:
-        print(f"ukr-g2p: error: {exc}", file=sys.stderr)
-        return 1
-
-    return 0
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+    args =

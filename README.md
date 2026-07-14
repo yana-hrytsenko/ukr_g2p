@@ -289,6 +289,33 @@ pip install -r requirements.txt
 
 ## Usage
 
+### CLI
+
+```bash
+ukr-g2p навчання
+# [nɐ'u̯t͡ʃɑnʲ:ɐ]
+
+ukr-g2p навчання --mode ukr_broad
+# [наўчанʹ:а]
+
+ukr-g2p навчання --mode all
+# formatted block with all seven layers
+
+ukr-g2p навчання --mode all --raw
+# ukr_phonemic: навчанʹнʹа
+# ukr_broad: наўчанʹ:а
+# ...
+```
+
+Available modes: `ukr_phonemic`, `ukr_broad`, `ukr_narrow`, `ipa_phonemic`,
+`ipa_broad` (default), `ipa_narrow`, `eng_friendly`, or `all`.
+
+> If `ukr-g2p` isn't found after installing, use
+> `python -m ukr_g2p` instead — same behavior, doesn't rely on your
+> PATH.
+
+### As a library
+
 ```python
 from ukr_g2p import transcribe
 
@@ -296,7 +323,7 @@ transcribe("навчання", mode="ipa_broad")
 # [nɐ'u̯t͡ʃɑnʲ:ɐ]
 
 transcribe("навчання", mode="all", formatted=False)
-# returns dict with all seven modes
+# {'ukr_phonemic': ..., 'ipa_broad': ..., ...}
 ```
 
 ---
