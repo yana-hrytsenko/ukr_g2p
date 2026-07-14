@@ -1,0 +1,34 @@
+                 Ukrainian word
+                      |
+        +-------------+-------------+
+        |                           |
+        v                           v
+ Normalization                  ByT5 model
+        |
+        v
+ Stress assignment
+        |
+        v
+ Annotation
+        |
+        v
+ Tokenization
+        |
+        v
+ Phonemic representation
+        |
+        v
+ Rule-based engine
+        |
+        v
+     Renderer
+        |
+        +--> ukr_phonemic
+        +--> ukr_broad
+        +--> ukr_narrow
+
+        +--> ipa_phonemic
+        +--> ipa_broad  <------ ByT5
+        +--> ipa_narrow
+
+        +--> eng_friendly

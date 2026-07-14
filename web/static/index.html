@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PhonetiKɪt͡sʲɐ — a Ukrainian phonetic transcription engine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:        #11141b;
+    --panel:      #191d26;
+    --panel-2:    #1f2430;
+    --line:       #2c3140;
+    --paper:      #e9e5d8;
+    --brass:      #c9a15a;
+    --brass-dim:  #8a713e;
+    --teal:       #5cb8ac;
+    --muted:      #8b90a0;
+    --radius:     3px;
+  }
+
+  *{ box-sizing:border-box; }
+
+  html,body{
+    margin:0;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'IBM Plex Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  ::selection{ background:var(--brass); color:var(--ink); }
+
+  a{ color:var(--brass); }
+
+  .wrap{
+    max-width:920px;
+    margin:0 auto;
+    padding:0 28px 120px;
+  }
+
+  /* ---------- header ---------- */
+
+  header{
+    padding:64px 0 40px;
+    border-bottom:1px solid var(--line);
+  }
+
+  .eyebrow{
+    font-family:'Noto Sans Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--brass);
+    margin:0 0 18px;
+  }
+
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:clamp(40px, 6vw, 64px);
+    line-height:1.02;
+    margin:0 0 20px;
+    letter-spacing:-.01em;
+  }
+
+  h1 em{
+    font-style:italic;
+    font-weight:400;
+    color:var(--brass);
+  }
+
+  .lede{
+    font-size:17px;
+    line-height:1.6;
+    color:var(--muted);
+    max-width:56ch;
+    margin:0;
+  }
+
+  .lede code{
+    font-family:'Noto Sans Mono', monospace;
+    background:var(--panel);
+    border:1px solid var(--line);
+    padding:1px 6px;
+    border-radius:var(--radius);
+    color:var(--paper);
+    font-size:.92em;
+  }
+
+  /* ---------- pipeline strip ---------- */
+
+  .pipeline{
+    display:flex;
+    align-items:center;
+    gap:0;
+    margin:36px 0 0;
+    overflow-x:auto;
+    padding-bottom:4px;
+  }
+
+  .stage{
+    font-family:'Noto Sans Mono', monospace;
+    font-size:12px;
+    color:var(--muted);
+    white-space:nowrap;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+
+  .stage .n{
+    color:var(--brass-dim);
+  }
+
+  .stage.active{ color:var(--paper); }
+  .stage.active .n{ color:var(--brass); }
+
+  .arrow{
+    color:var(--line);
+    margin:0 14px;
+    font-size:14px;
+  }
+
+  /* ---------- input ---------- */
+
+  .console{
+    margin-top:52px;
+  }
+
+  textarea{
+    width:100%;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    color:var(--paper);
+    font-family:'Fraunces', serif;
+    font-size:22px;
+    padding:20px 22px;
+    resize:vertical;
+    min-height:88px;
+    line-height:1.4;
+  }
+
+  textarea:focus{
+    outline:none;
+    border-color:var(--brass-dim);
+  }
+
+  .console-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-top:14px;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+
+  .hint{
+    font-family:'Noto Sans Mono', monospace;
+    font-size:12px;
+    color:var(--muted);
+  }
+
+  button{
+    background:var(--brass);
+    border:none;
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-weight:600;
+    font-size:14px;
+    padding:12px 26px;
+    border-radius:var(--radius);
+    cursor:pointer;
+    letter-spacing:.01em;
+    transition:transform .12s ease, background .12s ease;
+  }
+
+  button:hover{ background:#dab36c; }
+  button:active{ transform:translateY(1px); }
+  button:disabled{ background:var(--line); color:var(--muted); cursor:progress; }
+  button:focus-visible{ outline:2px solid var(--teal); outline-offset:2px; }
+
+  .examples{
+    margin-top:16px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+
+  .example-chip{
+    font-family:'Noto Sans Mono', monospace;
+    font-size:12.5px;
+    color:var(--muted);
+    background:transparent;
+    border:1px solid var(--line);
+    padding:6px 12px;
+    border-radius:100px;
+    cursor:pointer;
+  }
+
+  .example-chip:hover{
+    border-color:var(--brass-dim);
+    color:var(--paper);
+  }
+
+  /* ---------- mode toggles ---------- */
+
+  .modes{
+    margin-top:28px;
+    padding-top:22px;
+    border-top:1px solid var(--line);
+  }
+
+  .modes-label{
+    font-family:'Noto Sans Mono', monospace;
+    font-size:11px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin:0 0 12px;
+  }
+
+  .mode-group{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+
+  .mode-toggle{
+    font-family:'Noto Sans Mono', monospace;
+    font-size:12.5px;
+    color:var(--muted);
+    background:var(--panel);
+    border:1px solid var(--line);
+    padding:7px 13px;
+    border-radius:100px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:7px;
+    transition:border-color .12s ease, color .12s ease, background .12s ease;
+  }
+
+  .mode-toggle:hover{ border-color:var(--brass-dim); color:var(--paper); }
+
+  .mode-toggle .dot{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--line);
+    flex:none;
+  }
+
+  .mode-toggle.on{
+    background:rgba(201,161,90,.12);
+    border-color:var(--brass);
+    color:var(--paper);
+  }
+
+  .mode-toggle.on .dot{ background:var(--teal); }
+
+  .mode-toggle:focus-visible{ outline:2px solid var(--teal); outline-offset:2px; }
+
+  .error{
+    margin-top:16px;
+    font-family:'Noto Sans Mono', monospace;
+    font-size:13px;
+    color:#e07a5f;
+    display:none;
+  }
+
+  /* ---------- results ---------- */
+
+  .results{
+    margin-top:56px;
+    display:none;
+  }
+
+  .results.show{ display:block; }
+
+  .results-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    border-bottom:1px solid var(--line);
+    padding-bottom:14px;
+    margin-bottom:4px;
+  }
+
+  .results-head .word{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:20px;
+    color:var(--brass);
+  }
+
+  .layer{
+    padding:22px 0;
+    border-bottom:1px solid var(--line);
+    display:grid;
+    grid-template-columns:230px 1fr;
+    gap:18px;
+    align-items:baseline;
+  }
+
+  .layer:last-child{ border-bottom:none; }
+
+  .layer-label{
+    font-family:'Noto Sans Mono', monospace;
+    font-size:12px;
+    color:var(--muted);
+    letter-spacing:.05em;
+  }
+
+  .layer-label .stage-n{
+    color:var(--brass-dim);
+    margin-right:8px;
+  }
+
+  .layer-label .sub{
+    display:block;
+    color:var(--line);
+    font-size:11px;
+    margin-top:4px;
+  }
+
+  .layer-value{
+    font-family:'Noto Sans Mono', monospace;
+    font-size:21px;
+    color:var(--paper);
+    word-break:break-word;
+    line-height:1.5;
+  }
+
+  .layer-value .bracket{
+    color:var(--brass-dim);
+  }
+
+  @media (max-width:640px){
+    .layer{ grid-template-columns:1fr; gap:6px; }
+    header{ padding:44px 0 32px; }
+  }
+
+  footer{
+    margin-top:80px;
+    padding-top:24px;
+    border-top:1px solid var(--line);
+    font-family:'Noto Sans Mono', monospace;
+    font-size:12px;
+    color:var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">orthography → phonology → phonetics</p>
+    <h1>PhonetiKɪt͡sʲɐ<br><em>reads Ukrainian aloud.</em></h1>
+    <p class="lede">
+      A rule-based engine that takes Ukrainian text and derives how it's
+      actually pronounced — stress placement, assimilation, palatalization,
+      vowel reduction — across phonemic, broad, and narrow layers, then
+      renders the result as Ukrainian transcription, IPA, or a rough
+      <code>eng-friendly</code> spelling.
+    </p>
+
+    <div class="pipeline" id="pipeline">
+      <div class="stage active" data-stage="0"><span class="n">00</span> orthography</div>
+      <div class="arrow">→</div>
+      <div class="stage" data-stage="1"><span class="n">01</span> phonemic</div>
+      <div class="arrow">→</div>
+      <div class="stage" data-stage="2"><span class="n">02</span> broad</div>
+      <div class="arrow">→</div>
+      <div class="stage" data-stage="3"><span class="n">03</span> narrow</div>
+      <div class="arrow">→</div>
+      <div class="stage" data-stage="4"><span class="n">04</span> eng-friendly</div>
+    </div>
+  </header>
+
+  <div class="console">
+    <textarea id="input" maxlength="500" placeholder="Type or paste Ukrainian text…">привіт як настрій</textarea>
+    <div class="console-row">
+      <span class="hint" id="charcount">17 / 500</span>
+      <button id="run">Transcribe →</button>
+    </div>
+    <div class="examples" id="examples">
+      <button class="example-chip" data-text="сонце">сонце</button>
+      <button class="example-chip" data-text="щастя">щастя</button>
+      <button class="example-chip" data-text="дзвінок">дзвінок</button>
+      <button class="example-chip" data-text="боротьба">боротьба</button>
+      <button class="example-chip" data-text="від'їзд">від'їзд</button>
+    </div>
+    <p class="error" id="error"></p>
+
+    <div class="modes">
+      <p class="modes-label">layers to show</p>
+      <div class="mode-group" id="modeGroup"></div>
+    </div>
+  </div>
+
+  <div class="results" id="results">
+    <div class="results-head">
+      <span>result</span>
+      <span class="word" id="result-word"></span>
+    </div>
+    <div id="layers"></div>
+  </div>
+
+  <footer>
+    PhonetiKɪt͡sʲɐ is a rule-based phonological pipeline — normalization, stress
+    assignment, grapheme parsing, then combinatory / positional /
+    quantitative modification rules, rendered per-layer. Source on
+    <a href="#" id="repo-link">GitHub</a>.
+  </footer>
+
+</div>
+
+<script>
+  const LAYERS = [
+    { key: "ukr_phonemic", stage: "01", title: "Ukrainian — phonemic",  short: "ukr · phonemic", sub: "stress only",                          wrap: ["/", "/"] },
+    { key: "ukr_broad",    stage: "02", title: "Ukrainian — broad",     short: "ukr · broad",    sub: "+ assimilation, reduction, gemination", wrap: ["[", "]"] },
+    { key: "ukr_narrow",   stage: "03", title: "Ukrainian — narrow",    short: "ukr · narrow",   sub: "+ fine coarticulation",                 wrap: ["[", "]"] },
+    { key: "ipa_phonemic", stage: "01", title: "IPA — phonemic",        short: "ipa · phonemic", sub: "stress only",                          wrap: ["/", "/"] },
+    { key: "ipa_broad",    stage: "02", title: "IPA — broad",           short: "ipa · broad",    sub: "+ assimilation, reduction, gemination", wrap: ["[", "]"] },
+    { key: "ipa_narrow",   stage: "03", title: "IPA — narrow",          short: "ipa · narrow",   sub: "+ fine coarticulation",                 wrap: ["[", "]"] },
+    { key: "eng_friendly", stage: "04", title: "English-friendly",      short: "eng-friendly",   sub: "rough approximation, no IPA",           wrap: ["<", ">"] },
+  ];
+
+  const DEFAULT_MODES = ["all"];
+  const STORAGE_KEY = "ukr-g2p:selected-modes";
+
+  const input      = document.getElementById("input");
+  const charcount   = document.getElementById("charcount");
+  const runBtn      = document.getElementById("run");
+  const errorBox    = document.getElementById("error");
+  const resultsBox  = document.getElementById("results");
+  const resultWord  = document.getElementById("result-word");
+  const layersBox   = document.getElementById("layers");
+  const pipeline    = document.getElementById("pipeline");
+  const modeGroup   = document.getElementById("modeGroup");
+
+  let lastResults = null;
+  let selectedModes = loadSelectedModes();
+
+  function loadSelectedModes(){
+    try{
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      if (Array.isArray(saved) && saved.length){
+        return new Set(saved.filter(k => LAYERS.some(l => l.key === k)));
+      }
+    }catch(e){ /* ignore bad/missing storage */ }
+    return new Set(DEFAULT_MODES);
+  }
+
+  function saveSelectedModes(){
+    try{
+      localStorage.setItem(STORAGE_KEY, JSON.stringify([...selectedModes]));
+    }catch(e){ /* storage unavailable — fine, just won't persist */ }
+  }
+
+  function buildModeToggles(){
+    modeGroup.innerHTML = "";
+    LAYERS.forEach(layer => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "mode-toggle" + (selectedModes.has(layer.key) ? " on" : "");
+      btn.dataset.key = layer.key;
+      btn.innerHTML = `<span class="dot"></span>${layer.short}`;
+      btn.addEventListener("click", () => toggleMode(layer.key, btn));
+      modeGroup.appendChild(btn);
+    });
+  }
+
+  function toggleMode(key, btn){
+    if (selectedModes.has(key)){
+      if (selectedModes.size === 1) return; // keep at least one layer visible
+      selectedModes.delete(key);
+      btn.classList.remove("on");
+    }else{
+      selectedModes.add(key);
+      btn.classList.add("on");
+    }
+    saveSelectedModes();
+    if (lastResults) renderLayers(lastResults);
+  }
+
+  function updateCount(){
+    charcount.textContent = `${input.value.length} / 500`;
+  }
+  input.addEventListener("input", updateCount);
+  updateCount();
+
+  function setStage(n){
+    document.querySelectorAll(".stage").forEach(el => {
+      el.classList.toggle("active", Number(el.dataset.stage) <= n);
+    });
+  }
+
+  function renderLayers(results){
+    lastResults = results;
+    layersBox.innerHTML = "";
+    LAYERS.forEach(layer => {
+      if (!selectedModes.has(layer.key)) return;
+      const value = results[layer.key];
+      if (value === undefined) return;
+      const row = document.createElement("div");
+      row.className = "layer";
+      row.innerHTML = `
+        <div class="layer-label">
+          <span class="stage-n">${layer.stage}</span>${layer.title}
+          <span class="sub">${layer.sub}</span>
+        </div>
+        <div class="layer-value">
+          <span class="bracket">${layer.wrap[0]}</span>${escapeHtml(value)}<span class="bracket">${layer.wrap[1]}</span>
+        </div>`;
+      layersBox.appendChild(row);
+    });
+  }
+
+  function escapeHtml(str){
+    const div = document.createElement("div");
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  async function transcribe(){
+    const text = input.value.trim();
+    errorBox.style.display = "none";
+    if (!text){
+      errorBox.textContent = "Type or paste some Ukrainian text first.";
+      errorBox.style.display = "block";
+      return;
+    }
+
+    runBtn.disabled = true;
+    runBtn.textContent = "Working…";
+    setStage(1);
+
+    try{
+      const res = await fetch("/api/transcribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text })
+      });
+      const data = await res.json();
+
+      if (!res.ok){
+        errorBox.textContent = data.error || "Something went wrong.";
+        errorBox.style.display = "block";
+        resultsBox.classList.remove("show");
+        setStage(0);
+        return;
+      }
+
+      setStage(4);
+      resultWord.textContent = data.text;
+      renderLayers(data.results);
+      resultsBox.classList.add("show");
+    }catch(err){
+      errorBox.textContent = "Couldn't reach the server. Is it running?";
+      errorBox.style.display = "block";
+    }finally{
+      runBtn.disabled = false;
+      runBtn.textContent = "Transcribe →";
+    }
+  }
+
+  runBtn.addEventListener("click", transcribe);
+  input.addEventListener("keydown", e => {
+    if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) transcribe();
+  });
+
+  document.getElementById("examples").addEventListener("click", e => {
+    const chip = e.target.closest(".example-chip");
+    if (!chip) return;
+    input.value = chip.dataset.text;
+    updateCount();
+    transcribe();
+  });
+
+  // set up mode toggles, then run once on load
+  buildModeToggles();
+  transcribe();
+</script>
+
+</body>
+</html>

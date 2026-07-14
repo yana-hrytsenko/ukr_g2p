@@ -1,0 +1,3 @@
+IPA combining diacritics are rendered best in Chromium-based browsers (Chrome, Edge). 
+Due to differences in browser text shaping, Firefox may display some combining diacritics 
+with slight horizontal offsets.
