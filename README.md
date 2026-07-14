@@ -1,6 +1,10 @@
+![Python](https://img.shields.io/badge/python-3.11-blue)
+![License](https://img.shields.io/badge/License-Non--Commercial%20Research-orange)
+
 **[Live demo →](https://phonetikytsia.onrender.com)**
 
-![Python](https://img.shields.io/badge/python-3.11-blue)
+
+# ukr-g2p
 
 # ukr_g2p — Ukrainian Grapheme-to-Phoneme Transcription
 
