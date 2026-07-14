@@ -1,5 +1,7 @@
 **[Live demo →](https://phonetikytsia.onrender.com)**
 
+![Python](https://img.shields.io/badge/python-3.11-blue)
+
 # ukr_g2p — Ukrainian Grapheme-to-Phoneme Transcription
 
 Convert Ukrainian text into phonemic, broad IPA, narrow IPA and English-friendly pronunciation.
