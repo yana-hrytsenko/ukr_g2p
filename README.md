@@ -2,8 +2,8 @@
 
 **Rule-based + neural G2P for Ukrainian.** Converts text into six transcription
 modes (phonemic / broad / narrow, in both Ukrainian notation and IPA, plus an
-English-friendly pronunciation guide) via a transparent, declarative rule
-pipeline — not string hacking.
+English-friendly pronunciation guide) via **a transparent, declarative rule
+pipeline** — not string hacking.
 
 **[Live demo →](https://ukr-g2p.onrender.com)**
 ![Python](https://img.shields.io/badge/python-3.11-blue)
