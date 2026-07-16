@@ -5,16 +5,10 @@ modes (phonemic / broad / narrow, in both Ukrainian notation and IPA, plus an
 English-friendly pronunciation guide) via **a transparent, declarative rule
 pipeline** — not string hacking.
 
-**[Live demo →](https://ukr-g2p.onrender.com)** (use Chromium-based browsers (Chrome, Edge)
 ![Python](https://img.shields.io/badge/python-3.11-blue)
 ![License](https://img.shields.io/badge/License-Non--Commercial%20Research-orange)
+**[Live demo →](https://ukr-g2p.onrender.com)** (use Chromium-based browsers (Chrome, Edge)
 
-```
-навчання
-  ukr_phonemic  /навча'нʹнʹа/
-  ipa_broad     [nɐ'u̯t͡ʃɑnʲ:ɐ]
-  eng_friendly  n-ah-v-ch-AH-nj-ny-ah
-```
 <img width="278" height="205" alt="Screenshot 2026-07-16 090443" src="https://github.com/user-attachments/assets/b90edfb3-89eb-4a21-a3c2-e42d8951714b" />
 
 
