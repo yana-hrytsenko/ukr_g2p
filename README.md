@@ -41,7 +41,8 @@ Three cumulative passes (phonemic → broad → narrow) mean each level
 inherits the previous one's changes, mirroring standard phonological
 theory. A fine-tuned ByT5 model complements the rule engine for broad
 IPA, occasionally beating it on stress prediction for out-of-dictionary
-words. <img width="278" height="205" alt="Screenshot 2026-07-16 090443" src="https://github.com/user-attachments/assets/0c0ef076-80ef-48a6-9eb5-3624e189a2ad" />
+words.
+
 
 
 **Jump to:** [Architecture](#architecture) · [Output Modes](#output-modes) ·
