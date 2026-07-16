@@ -8,7 +8,7 @@ pipeline** — not string hacking.
 **[Live demo →](https://ukr-g2p.onrender.com)** (use Chromium-based browsers (Chrome, Edge)
 ![Python](https://img.shields.io/badge/python-3.11-blue)
 ![License](https://img.shields.io/badge/License-Non--Commercial%20Research-orange)
-
+(tales a minute to load)
 
 <img width="385" height="196" alt="Screenshot 2026-07-16 091509" src="https://github.com/user-attachments/assets/dd6cc621-2f10-40b5-a1cc-a62cb938350b" />
 
