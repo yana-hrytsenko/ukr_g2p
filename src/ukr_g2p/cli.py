@@ -46,4 +46,30 @@ def build_parser():
 
 def main(argv=None):
     parser = build_parser()
-    args =
+    args = parser.parse_args(argv)
+    text = " ".join(args.text)
+
+    try:
+        if args.mode == "all":
+            if args.raw:
+                results = transcribe(text, mode="all", formatted=False)
+                for key in MODES:
+                    print(f"{key}: {results[key]}")
+            else:
+                print(transcribe(text, mode="all", formatted=True))
+        else:
+            result = transcribe(text, mode=args.mode)
+            if args.raw:
+                print(result)
+            else:
+                left, right = WRAP[args.mode]
+                print(f"{left}{result}{right}")
+    except Exception as exc:
+        print(f"ukr-g2p: error: {exc}", file=sys.stderr)
+        return 1
+
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
