@@ -7,6 +7,8 @@ def mark_prefix_d_boundary(text):
     return text
 
 def mark_apostrophe(text):
+    for variant in ('\u2019', '\u2018', '\u02BC', '`', '\u00B4'):
+        text = text.replace(variant, "'")
     text = text.replace("'", APOSTROPHE)
     return text
 
