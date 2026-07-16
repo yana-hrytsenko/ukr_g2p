@@ -334,10 +334,86 @@ transcribe("навчання", mode="all", formatted=False)
 
 ## References
 
-- Xue et al. (2022) — [ByT5: Towards a Token-Free Future](https://arxiv.org/abs/2105.13626)
-- Ylonen (2022) — [Wiktextract: Wiktionary as Machine-Readable Structured Data](https://aclanthology.org/2022.lrec-1.140)
-- Ukrainian phonology reference: [Help:IPA/Ukrainian](https://en.wikipedia.org/wiki/Help:IPA/Ukrainian)
+### Neural model
 
+- Xue, L., Barua, A., Constant, N., Al-Rfou, R., Narang, S., Kale, M., Roberts, A., & Raffel, C. (2022). **ByT5: Towards a Token-Free Future with Pre-trained Byte-to-Byte Models**. *Transactions of the Association for Computational Linguistics*, 10, 291–306. https://arxiv.org/abs/2105.13626
+
+- Zhu, J., Zhang, C., & Jurgens, D. (2022). **ByT5 Model for Massively Multilingual Grapheme-to-Phoneme Conversion**. *Interspeech 2022*. https://arxiv.org/abs/2204.03067
+
+- Raffel, C., Shazeer, N., Roberts, A., Lee, K., Narang, S., Matena, M., Zhou, Y., Li, W., & Liu, P. J. (2020). **Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer**. *Journal of Machine Learning Research*, 21(140), 1–67. https://arxiv.org/abs/1910.10683
+
+### Evaluation metrics
+
+- Bisani, M., & Ney, H. (2008). **Joint-sequence models for grapheme-to-phoneme conversion**. *Speech Communication*, 50(5), 434–451. https://doi.org/10.1016/j.specom.2008.01.002
+  *(Standard reference for PER as a G2P evaluation metric)*
+
+- Novak, J. R., Minematsu, N., & Hirose, K. (2012). **WFST-based grapheme-to-phoneme conversion: Open source tools for alignment, model-building and decoding**. *Proceedings of FSMNLP 2012*, 45–49. https://aclanthology.org/W12-6208/
+
+### Training data
+
+- Ylonen, T. (2022). **Wiktextract: Wiktionary as Machine-Readable Structured Data**.
+  In *Proceedings of the 13th Conference on Language Resources and Evaluation (LREC 2022)*,
+  pp. 1317–1325, Marseille, France. European Language Resources Association.
+  https://aclanthology.org/2022.lrec-1.140
+  *(Gold-standard IPA data sourced from kaikki.org Ukrainian Wiktionary dump,
+  extracted using Wiktextract)*
+
+- **kaikki.org Ukrainian dictionary dump** — raw JSONL data.
+  https://kaikki.org/dictionary/Ukrainian/
+
+### Training infrastructure
+
+- Wolf, T., Debut, L., Sanh, V., Chaumond, J., Delangue, C., Moi, A., Cistac, P., Rault, T., Louf, R., Funtowicz, M., Davison, J., Shleifer, S., von Platen, P., Ma, C., Jernite, Y., Plu, J., Xu, C., Le Scao, T., Gugger, S., … Rush, A. M. (2020). **Transformers: State-of-the-Art Natural Language Processing**. *Proceedings of EMNLP 2020: System Demonstrations*, 38–45. https://aclanthology.org/2020.emnlp-demos.6
+
+- **Seq2SeqTrainer and Seq2SeqTrainingArguments** — Hugging Face Transformers documentation.
+  https://huggingface.co/docs/transformers/main_classes/trainer#transformers.Seq2SeqTrainer
+
+- **ByT5 model card** — Hugging Face Hub.
+  https://huggingface.co/google/byt5-small
+
+- **Fine-tuning a sequence-to-sequence model** — Hugging Face documentation.
+  https://huggingface.co/docs/transformers/tasks/summarization
+  *(Canonical Seq2SeqTrainer fine-tuning guide used as reference for training setup)*
+
+### Hugging Face
+
+- Wolf, T., Debut, L., Sanh, V., Chaumond, J., Delangue, C., Moi, A., Cistac, P., Rault, T., Louf, R., Funtowicz, M., Davison, J., Shleifer, S., von Platen, P., Ma, C., Jernite, Y., Plu, J., Xu, C., Le Scao, T., Gugger, S., … Rush, A. M. (2020). **Transformers: State-of-the-Art Natural Language Processing**. *Proceedings of EMNLP 2020: System Demonstrations*, 38–45. https://aclanthology.org/2020.emnlp-demos.6
+
+### Ukrainian phonology
+
+- Дика, Л. В. (2015). **Система фонем сучасної української літературної мови**. https://www.scribd.com/document/818481608
+
+- Шевченко, Л. І. (n.d.). **Правила фонетичної транскрипції**. https://www.scribd.com/presentation/498129789
+
+- Shevelov, G. Y. (2002). **Ukrainian**. *Journal of the International Phonetic Association*, 32(1), 117–125. https://www.cambridge.org/core/journals/journal-of-the-international-phonetic-association/article/ukrainian/D20ECF62B57E4162670BD938A4B8EA33
+
+- **Illustrations of Ukrainian Phonetics**. https://ayangelah.me/attachments/Illustrations%20of%20Ukrainian%20Phonetics.pdf
+
+- **Help:IPA/Ukrainian** — Wikipedia. https://en.wikipedia.org/wiki/Help:IPA/Ukrainian
+
+- **Ukrainian phonology** — Wikipedia. https://en.wikipedia.org/wiki/Ukrainian_phonology
+
+- **Довідка:МФА/Українська** — Вікіпедія. https://uk.wikipedia.org/wiki/Довідка:МФА/Українська
+
+- **Комбінаторні фонетичні зміни**. https://www.scribd.com/presentation/498132158
+
+- **Асиміляції**. https://www.scribd.com/document/704285513
+
+- **Класифікація звуків**. https://www.scribd.com/presentation/498129874
+
+- Корнієнко, В. (2009). **Транскрипція**. https://is.muni.cz/el/phil/jaro2009/UJA105/um/8._transkrypcija.pdf
+
+- **Українська фонетика в МФА**. https://www.scribd.com/document/769480651
+
+### Tools
+
+- **ukrainian-word-stress** Python library. https://github.com/lang-uk/ukrainian-word-stress
+
+- **IPA Chart** — jbdowse.com. https://jbdowse.com/ipa/
+
+- **Wiktionary Ukrainian Pronunciation Tool** — hellpanderrr. https://hellpanderrr.github.io/wiktionary_pron/?lang=Ukrainian
+
+- Mikhalev, A. (2015). **Фонологічна система сучасної української мови**. *Мовознавство*, 1. http://www.irbis-nbuv.gov.ua/cgi-bin/irbis_nbuv/cgiirbis_64.exe?I21DBN=LINK&P21DBN=UJRN&Z21ID=&S21REF=10&S21CNR=20&S21STN=1&S21FMT=ASP_meta&C21COM=S&2_S21P03=FILA=&2_S21STR=Mikks_2015_1_37
 ---
 
 AI tools were used for parts of implementation support, debugging, and code refinement.
