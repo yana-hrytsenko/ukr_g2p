@@ -10,7 +10,7 @@ pipeline** — not string hacking.
 ![License](https://img.shields.io/badge/License-Non--Commercial%20Research-orange)
 
 
-<img width="278" height="205" alt="Screenshot 2026-07-16 090443" src="https://github.com/user-attachments/assets/b90edfb3-89eb-4a21-a3c2-e42d8951714b" />
+<img width="385" height="196" alt="Screenshot 2026-07-16 091509" src="https://github.com/user-attachments/assets/dd6cc621-2f10-40b5-a1cc-a62cb938350b" />
 
 
 ### Why this is different
