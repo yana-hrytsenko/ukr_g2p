@@ -5,7 +5,7 @@ modes (phonemic / broad / narrow, in both Ukrainian notation and IPA, plus an
 English-friendly pronunciation guide) via **a transparent, declarative rule
 pipeline** — not string hacking.
 
-**[Live demo →](https://ukr-g2p.onrender.com)**
+**[Live demo →](https://ukr-g2p.onrender.com)** (use Chromium-based browsers (Chrome, Edge)
 ![Python](https://img.shields.io/badge/python-3.11-blue)
 ![License](https://img.shields.io/badge/License-Non--Commercial%20Research-orange)
 
