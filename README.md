@@ -15,14 +15,17 @@ pipeline** — not string hacking.
   ipa_broad     [nɐ'u̯t͡ʃɑnʲ:ɐ]
   eng_friendly  n-ah-v-ch-AH-nj-ny-ah
 ```
+<img width="278" height="205" alt="Screenshot 2026-07-16 090443" src="https://github.com/user-attachments/assets/b90edfb3-89eb-4a21-a3c2-e42d8951714b" />
+
 
 ### Why this is different
 
 Most G2P tools mutate strings directly, hard-coding each phonological
 process into procedural logic. Here, every process — assimilation,
 gemination, vowel reduction — is a **typed, inspectable rule object**
-applied to tokens carrying explicit phonological features. Rules are
-data, not control flow:
+applied to tokens carrying explicit phonological features. 
+[See →](ukr_g2p/src/ukr_g2p/modifications.py)
+Rules are data, not control flow:
 
 ```python
 SOFTNESS_ASSIMILATION = CombinatoryModificationRule(
@@ -43,7 +46,9 @@ Three cumulative passes (phonemic → broad → narrow) mean each level
 inherits the previous one's changes, mirroring standard phonological
 theory. A fine-tuned ByT5 model complements the rule engine for broad
 IPA, occasionally beating it on stress prediction for out-of-dictionary
-words. [Full diagram →](ukr_g2p/doc)
+words. <img width="278" height="205" alt="Screenshot 2026-07-16 090443" src="https://github.com/user-attachments/assets/0c0ef076-80ef-48a6-9eb5-3624e189a2ad" />
+<img width="278" height="205" alt="Screenshot 2026-07-16 090443" src="https://github.com/user-attachments/assets/da28b7e1-70f8-43d5-8b69-a74a8e3cdc34" />
+
 
 **Jump to:** [Architecture](#architecture) · [Output Modes](#output-modes) ·
 [Rules Covered](#phonological-rules-covered) · [Neural Model](#neural-model--byt5) ·
