@@ -1,6 +1,6 @@
 from copy import deepcopy
 from .normalise import preprocess
-from .devoice_exceptions import devoice
+from .devoice_exceptions import exceptions
 from .stress import *
 from .annotate import *
 from .tokenizer import tokenize
@@ -27,8 +27,8 @@ def apply_stage(tokens, rules):
 def build_pipeline(text):
 
     text =     preprocess(text)
-    text =     devoice(text)
     text =     stress(text)
+    text =     exceptions(text)
     text =     annotate(text)
     tokens =   tokenize(text)
     phonemes = parse(tokens, PARSING_RULES)

@@ -8,6 +8,13 @@ DEVOICE_EXCEPTIONS = {
 }
 
 
+REFLEXIVE_ASSIMILATION = {
+
+    'ться': 'цця',
+
+}
+
+
 IOTATION_MAP = {
     
     'я': 'а', 
