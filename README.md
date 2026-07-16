@@ -381,6 +381,8 @@ transcribe("навчання", mode="all", formatted=False)
 
 ### Ukrainian phonology
 
+- Mikhalev, A. (2015). **Фонологічна система сучасної української мови**. *Мовознавство*, 1. http://www.irbis-nbuv.gov.ua/cgi-bin/irbis_nbuv/cgiirbis_64.exe?I21DBN=LINK&P21DBN=UJRN&Z21ID=&S21REF=10&S21CNR=20&S21STN=1&S21FMT=ASP_meta&C21COM=S&2_S21P03=FILA=&2_S21STR=Mikks_2015_1_37
+
 - Дика, Л. В. (2015). **Система фонем сучасної української літературної мови**. https://www.scribd.com/document/818481608
 
 - Шевченко, Л. І. (n.d.). **Правила фонетичної транскрипції**. https://www.scribd.com/presentation/498129789
@@ -413,9 +415,8 @@ transcribe("навчання", mode="all", formatted=False)
 
 - **Wiktionary Ukrainian Pronunciation Tool** — hellpanderrr. https://hellpanderrr.github.io/wiktionary_pron/?lang=Ukrainian
 
-- Mikhalev, A. (2015). **Фонологічна система сучасної української мови**. *Мовознавство*, 1. http://www.irbis-nbuv.gov.ua/cgi-bin/irbis_nbuv/cgiirbis_64.exe?I21DBN=LINK&P21DBN=UJRN&Z21ID=&S21REF=10&S21CNR=20&S21STN=1&S21FMT=ASP_meta&C21COM=S&2_S21P03=FILA=&2_S21STR=Mikks_2015_1_37
 ---
 
-AI tools were used for parts of implementation support, debugging, and code refinement.
+*AI tools were used for parts of implementation support, debugging, and code refinement.
 The linguistic analysis, rule design, model choices, dataset construction
-and evaluation methodology were developed by the author.
+and evaluation methodology were developed by the author.*
