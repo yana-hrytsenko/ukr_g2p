@@ -19,7 +19,7 @@ Most G2P tools mutate strings directly, hard-coding each phonological
 process into procedural logic. Here, every process — assimilation,
 gemination, vowel reduction — is a **typed, inspectable rule object**
 applied to tokens carrying explicit phonological features. 
-[See →](ukr_g2p/src/ukr_g2p/modifications.py)
+(See *ukr_g2p/src/ukr_g2p/modifications.py*)
 Rules are data, not control flow:
 
 ```python
