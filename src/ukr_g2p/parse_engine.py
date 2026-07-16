@@ -73,10 +73,16 @@ def parse(graphemes, rules):
                 if source_stress and result:
                     for phoneme in result:
                         phoneme.stress = False
-                    for phoneme in reversed(result):
-                        if phoneme.token_is("vowel"):
-                            phoneme.stress = True
-                            break
+                    target = None
+                    if g.stress:
+                        target = next((p for p in result if p.token_is("vowel") and p.char == g.char), None)
+                    if target is None:
+                        for phoneme in reversed(result):
+                            if phoneme.token_is("vowel"):
+                                target = phoneme
+                                break
+                    if target is not None:
+                        target.stress = True
                     else:
                         result[-1].stress = True
                 phonemes.extend(result)
