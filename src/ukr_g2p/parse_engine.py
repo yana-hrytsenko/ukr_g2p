@@ -69,7 +69,7 @@ def parse(graphemes, rules):
                     p if isinstance(p, Token) else make_phoneme(p)
                     for p in result
                 ]
-                source_stress = g.stress or (nxt is not None and nxt.stress)
+                source_stress = g.stress or (pattern.consume >= 2 and nxt is not None and nxt.stress)
                 if source_stress and result:
                     for phoneme in result:
                         phoneme.stress = False
