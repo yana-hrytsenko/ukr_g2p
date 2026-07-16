@@ -193,10 +193,8 @@ Ukrainian Wiktionary dump, excluded from training data.
 | Metric | Rule-based | ByT5 |
 |--------|-----------|------|
 | PER (with stress) | 6.5% | 12.3% |
-| PER (no stress) | 1.6% | 5.1% |
 | **PER (no stress, no vowels) | 0.7% | 1.0% |**
 | Exact match | 65.5% | 50.9% |
-| Exact match (no stress) | 86.8% | 67.3% |
 | **Exact match (no stress, no vowels) | 94.7% | 93.3% |**
 | WER | 34.5% | 49.1% |
 
