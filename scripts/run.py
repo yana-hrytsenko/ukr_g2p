@@ -1,14 +1,8 @@
 from ukr_g2p import transcribe
 
 
-print(transcribe("спілка", mode="all"))
 
-
-
-
-
-
-
+print(transcribe("Привіт, як настрій?!", mode="all"))
 
 
 

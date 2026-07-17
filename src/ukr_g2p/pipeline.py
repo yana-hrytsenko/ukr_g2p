@@ -1,6 +1,6 @@
 from copy import deepcopy
 from .normalise import preprocess
-from .devoice_exceptions import exceptions
+from .exceptions import exceptions
 from .stress import *
 from .annotate import *
 from .tokenizer import tokenize
@@ -72,7 +72,7 @@ def transcribe(text, mode="ipa_broad", formatted=True):
         if not formatted:
             return results
         return (
-            f"Word: {text}\n\n"
+            f"Word: {preprocess(stress(text))}\n\n"
             f"ukr_phonemic : /{results['ukr_phonemic']}/\n"
             f"ukr_broad    : [{results['ukr_broad']}]\n"
             f"ukr_narrow   : [{results['ukr_narrow']}]\n\n"
