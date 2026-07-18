@@ -89,6 +89,57 @@ patterns common in earlier rule-based G2P implementations.
 
 **Diagram.** Can be found in `ukr_g2p/doc`.
 
+### Token model
+
+Every phoneme flowing through the pipeline is a `Token`:
+
+```python
+@dataclass
+class Token:
+    char:           str
+    allophone:      str  | None = None
+
+    stress:         bool = False
+    palatalization: bool = False
+
+    long_start:     bool = False
+    long_end:       bool = False
+
+    features:       set  = field(default_factory=set)
+    modifications:  set  = field(default_factory=set)
+```
+
+`features` is a set of phonological tags (`vowel`, `consonant`, `voiced`, 
+`dental`, `sibilant`, ...) assigned from `phonemas.py`'s `VOWELS`/`CONSONANTS` 
+tables. Rules never hardcode specific letters — they match on features instead, 
+so a rule like "voice assimilation" reads as *any voiceless consonant before any 
+voiced consonant*, not *"к" before "б"*.
+
+#### Checking features
+
+```python
+token.token_is('vowel')              # True/False, single feature
+token.has('stress')                  # checks a plain attribute, not features
+token.has_mod('nasalization')        # checks the modifications set
+```
+
+#### Building rule conditions
+
+Rules compose these into predicates using the free functions in `token.py`:
+
+```python
+phoneme_is('vowel', 'softening')                   # all features present
+phoneme_is_either('dental', 'alveolar')            # any feature present
+phoneme_is_not('voiceless')                        # none of the features present
+either(phoneme_is('vowel'), phoneme_has('stress')) # OR across predicates
+both(phoneme_is('consonant'), phoneme_is('soft'))  # AND across predicates
+```
+
+These predicates are what you'll see as `trigger=`/`target=` in every rule in 
+`modifications.py` — for example, `VOICING_ASSIMILATION` triggers on `phoneme_is('voiced')` 
+and targets `phoneme_is('voiceless')`, converting the target via `VOICE_PAIRS_MAP` 
+regardless of which specific letters are involved.
+
 ---
 
 ## Output Modes
