@@ -399,7 +399,7 @@ transcribe("навчання", mode="all", formatted=False)
 
 - Novak, J. R., Minematsu, N., & Hirose, K. (2012). **WFST-based grapheme-to-phoneme conversion: Open source tools for alignment, model-building and decoding**. *Proceedings of FSMNLP 2012*, 45–49. https://aclanthology.org/W12-6208/
 
-### Training data
+### Evaluation data
 
 - Ylonen, T. (2022). **Wiktextract: Wiktionary as Machine-Readable Structured Data**.
   In *Proceedings of the 13th Conference on Language Resources and Evaluation (LREC 2022)*,
