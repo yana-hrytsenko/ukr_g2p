@@ -467,6 +467,12 @@ transcribe("навчання", mode="all", formatted=False)
 
 ---
 
+## Acknowledgments
+
+Stress placement uses [ukrainian-word-stress](https://github.com/lang-uk/ukrainian-word-stress) by Oleksiy Syvokon (MIT License).
+
+---
+
 *AI tools were used for parts of implementation support, debugging, and code refinement.
 The linguistic analysis, rule design, model choices, dataset construction
 and evaluation methodology were developed by the author.*
