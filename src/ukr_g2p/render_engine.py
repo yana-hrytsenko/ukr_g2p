@@ -52,56 +52,29 @@ def NOT(pred):
     return lambda t, ctx: not pred(t, ctx)
 
 
-def find_syllable_start(tokens, stressed_index):
-    i = stressed_index - 1
-    onset_start = stressed_index  
-    while i >= 0:
-        curr = tokens[i]
-        if curr.char in WORD_EDGE:
-            break
-        if curr.token_is('vowel'):
-            onset_start = i + 1
-            break
-        onset_start = i
-        i -= 1
-    return onset_start
+from .syllables import syllable_onsets
 
-'''def find_syllable_start(tokens, stressed_index):
+def find_syllable_start(tokens, stressed_index):
     """
-    Finds the onset of the stressed syllable according to Ukrainian syllable rules.
-    Returns token index where IPA stress should be placed.
+    Finds the onset of the stressed syllable according to Ukrainian
+    syllable-division rules (see syllables.py). Returns the token
+    index where IPA stress should be placed.
     """
-    # find previous vowel
-    prev_vowel = None
-    for i in range(stressed_index - 1, -1, -1):
-        if tokens[i].token_is('vowel'):
-            prev_vowel = i
+    start = stressed_index
+    while start > 0 and tokens[start - 1].char not in WORD_EDGE:
+        start -= 1
+    end = stressed_index
+    while end < len(tokens) and tokens[end].char not in WORD_EDGE:
+        end += 1
+
+    onsets = syllable_onsets(tokens, start, end)
+    onset = start
+    for o in onsets:
+        if o <= stressed_index:
+            onset = o
+        else:
             break
-    # word starts with stressed vowel
-    if prev_vowel is None:
-        return stressed_index
-    # consonants between vowels
-    cluster = [
-        i for i in range(prev_vowel + 1, stressed_index)
-        if tokens[i].token_is('consonant')
-    ]
-    # no consonants between vowels
-    if not cluster:
-        return stressed_index
-    # one consonant → belongs to next syllable
-    if len(cluster) == 1:
-        return cluster[0]
-    # convert to chars
-    chars = [tokens[i].char for i in cluster]
-    # first sonorant after vowel stays in previous syllable
-    if chars[0] in {"й", "в", "р", "л", "м", "н"}:
-        return cluster[1]
-    # if second consonant is й/р/л,
-    # cluster goes together to next syllable
-    if len(chars) >= 2 and chars[1] in {"й", "р", "л"}:
-        return cluster[0]
-    # after stressed syllable one consonant closes previous syllable
-    return cluster[-1]'''
+    return onset
 
 def after_soft_before_vowel():
     return lambda t, ctx: (
