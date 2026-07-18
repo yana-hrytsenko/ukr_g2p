@@ -396,7 +396,6 @@ transcribe("навчання", mode="all", formatted=False)
 ### Evaluation metrics
 
 - Bisani, M., & Ney, H. (2008). **Joint-sequence models for grapheme-to-phoneme conversion**. *Speech Communication*, 50(5), 434–451. https://doi.org/10.1016/j.specom.2008.01.002
-  *(Standard reference for PER as a G2P evaluation metric)*
 
 - Novak, J. R., Minematsu, N., & Hirose, K. (2012). **WFST-based grapheme-to-phoneme conversion: Open source tools for alignment, model-building and decoding**. *Proceedings of FSMNLP 2012*, 45–49. https://aclanthology.org/W12-6208/
 
