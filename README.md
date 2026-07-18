@@ -469,7 +469,7 @@ transcribe("навчання", mode="all", formatted=False)
 
 ## Acknowledgments
 
-Stress placement uses [ukrainian-word-stress](https://github.com/lang-uk/ukrainian-word-stress) by Oleksiy Syvokon (MIT License).
+Stress placement uses [ukrainian-word-stress](https://github.com/lang-uk/ukrainian-word-stress) (MIT License).
 
 ---
 
