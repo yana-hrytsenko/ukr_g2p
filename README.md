@@ -37,6 +37,14 @@ SOFTNESS_ASSIMILATION = CombinatoryModificationRule(
 )
 ```
 
+```python
+RenderPattern(
+        condition=has_mod("labialization"),
+        output=literal("ʷ"),
+        position="after"
+    )
+```
+
 Three cumulative passes (phonemic → broad → narrow) mean each level
 inherits the previous one's changes, mirroring standard phonological
 theory. A fine-tuned ByT5 model complements the rule engine for broad
